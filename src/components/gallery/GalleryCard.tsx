@@ -3,6 +3,7 @@ import LazyloadImage from "./LazyloadImage";
 import LoadingButton from "../ui/loading-button";
 import { cn } from "@/lib/utils";
 import GalleryImageOverlay from "./GalleryImageOverlay";
+import { ArrowDownIcon } from "@radix-ui/react-icons";
 
 interface GalleryCardProps {
   className?: string;
@@ -29,7 +30,7 @@ export default function ({ className, image }: GalleryCardProps) {
         />
         <GalleryImageOverlay className="group-hover:opacity-100 transition-opacity" />
         {/* Photographer Info */}
-        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-sm p-2 transition-transform duration-200 ease-in-out sm:translate-y-10 group-hover:translate-y-0">
+        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-xs sm:text-sm p-1 px:2 sm:p-2 transition-transform duration-200 ease-in-out translate-y-10 group-hover:translate-y-0 whitespace-nowrap overflow-hidden text-ellipsis">
           Photo by{" "}
           <a
             title="View Photographer Profile"
@@ -46,7 +47,7 @@ export default function ({ className, image }: GalleryCardProps) {
       </div>
 
       {/* Download Button */}
-      <div className="absolute top-0 right-0 m-2 sm:opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+      <div className="absolute top-0 right-0 m-2 sm:opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 ">
         <LoadingButton
           size="sm"
           title="Download Image"
@@ -57,8 +58,9 @@ export default function ({ className, image }: GalleryCardProps) {
               `tiny-image-${image.id}.png`
             )
           }
-          className="bg-white text-black hover:bg-gray-200">
-          Download
+          className="bg-white text-black hover:bg-gray-200 h-6 px-2 sm:h-8 sm:px-3">
+          <span className="hidden sm:block">Download</span>
+          <ArrowDownIcon className="sm:hidden" />
         </LoadingButton>
       </div>
     </div>
