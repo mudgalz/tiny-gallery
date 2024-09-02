@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Simple Gallery Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple gallery page which allows users to search and download photos from two sources: Pexels and Pixabay. The page also includes filters and search features.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Search for photos by keyword
+- Filter photos by Type, Orientation and colors.
+- Change the source of photos
+- Download photos
 
-## Expanding the ESLint configuration
+## How it works
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The page uses the Pexels and Pixabay APIs to search for photos based on the user's input. The search results are then displayed in a grid, with each photo showing its title, description, and a "Download" button. When the user clicks on the "Download" button, the photo is downloaded to their computer.
 
-- Configure the top-level `parserOptions` property like this:
+## Why I made this
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+I made this page to learn more about using APIs and to practice building a simple web app. I also wanted to provide a simple way for users to search and download photos from Pexels and Pixabay.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Tech used
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- React
+- TypeScript
+- Vite
+- ESLint
+- Pexels API
+- Pixabay API
+- React Query
+- Shadcn
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Contribution
+
+If you want to contribute to this project, I'd be happy to accept pull requests to add new features or sources. Here are some ways you can contribute:
+
+- Add a new page for a different source of photos, such as Unsplash or Flickr.
+- Add a filter to the existing page to allow users to search for photos from a different source.
+- Add a feature to allow users to save their favorite photos.
+- Add a feature to allow users to upload their own photos.
+
+Please make sure to follow the following guidelines before making a pull request:
+
+- Make sure your code is well tested and follows the existing coding style.
+- Make sure your code is compatible with the latest version of React.
+- Make sure your changes do not break any existing features.
+
+I'm open to any suggestions or ideas you may have, so feel free to reach out to me if you have any questions or need help with anything.
