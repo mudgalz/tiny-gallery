@@ -7,14 +7,13 @@ export default function () {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Link to="/" className="flex gap-2">
           <img src={logo} className="size-6" />
-          <h1 className="font-medium">Tiny.js</h1>
+          <h1 className="font-medium">Tiny Gallery</h1>
         </Link>
         <div className="flex gap-2">
           <div className="flex gap-2">
-            <ReactLink to="/weather">Weather</ReactLink>
-          </div>
-          <div className="flex gap-2">
-            <ReactLink to="/gallery">Photos</ReactLink>
+            <ReactLink target="_blank" href="https://mudgal.framer.ai">
+              I'm Here
+            </ReactLink>
           </div>
         </div>
       </div>
