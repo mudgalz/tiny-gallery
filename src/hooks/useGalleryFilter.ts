@@ -56,6 +56,7 @@ export default function useGalleryFilter() {
       page: "1",
       color: "",
       orientation: "",
+      image_type:"all"
     });
   };
 
