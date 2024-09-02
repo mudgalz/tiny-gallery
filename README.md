@@ -1,4 +1,4 @@
-# Tiny Gallery - [Visit Live Site](https://tinygallery.netlify.app)
+# Tiny Gallery - <a href="https://tinygallery.netlify.app" target="_blank">Visit Live Site</a>
 
 This is a simple gallery page which allows users to search and download photos from two sources: Pexels and Pixabay. The page also includes filters and search features.
 
