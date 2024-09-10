@@ -4,7 +4,6 @@ import LoadingButton from "../ui/loading-button";
 import { cn } from "@/lib/utils";
 import GalleryImageOverlay from "./GalleryImageOverlay";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
-import { useGalleryStore } from "@/store/gallerySource";
 
 interface GalleryCardProps {
   className?: string;
@@ -13,19 +12,14 @@ interface GalleryCardProps {
 
 export default function ({ className, image }: GalleryCardProps) {
   const { downloadImageMutation } = useApiMutations();
-  const { setSelectedImageUrl } = useGalleryStore();
-  const isPexelImage = "avg_color" in image;
   const handleDownload = (url: string, filename: string) => {
     downloadImageMutation.mutate({ url, filename });
   };
-  const handleViewImage = () => {
-    setSelectedImageUrl(isPexelImage ? image.src.large : image.largeImageURL);
-  };
+  const isPexelImage = "avg_color" in image;
   return (
     <div
-      onClick={handleViewImage}
       className={cn(
-        "relative w-full h-full rounded-md overflow-hidden group hover:cursor-pointer",
+        "relative w-full h-full rounded-md overflow-hidden group",
         className
       )}>
       {/* Image Container with Shadow */}
@@ -41,7 +35,6 @@ export default function ({ className, image }: GalleryCardProps) {
           <a
             title="View Photographer Profile"
             target="_blank"
-            tabIndex={-1}
             className="underline"
             href={
               isPexelImage
