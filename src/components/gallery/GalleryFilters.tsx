@@ -6,6 +6,8 @@ import {
   orientationOptions,
   pixabayColorOptions,
   pixabayImageTypes,
+  unsplashColorOptions,
+  unsplashOrderByOptions,
 } from "../../data";
 import TinySelect from "../TinySelect";
 import ColorPicker from "./ColorPicker";
@@ -20,6 +22,8 @@ export default function () {
     source,
     selectedImageType,
     handleImageTypeChange,
+    orderBy,
+    handleOrderByChange,
   } = useGalleryFilter();
 
   const [hexCode, setHexCode] = useState<string>(selectedColor);
@@ -69,7 +73,9 @@ export default function () {
             }`}
             value={selectedColor === "" ? "all" : selectedColor}
             onValueChange={(color) => handleColorChange(color)}
-            options={pixabayColorOptions}
+            options={
+              source === "pixabay" ? pixabayColorOptions : unsplashColorOptions
+            }
           />
         )}
         {source === "pixabay" && (
@@ -80,6 +86,16 @@ export default function () {
             value={selectedImageType}
             onValueChange={(type) => handleImageTypeChange(type)}
             options={pixabayImageTypes}
+          />
+        )}
+        {source === "unsplash" && (
+          <TinySelect
+            className={`w-full h-full focus:ring-0 ${
+              orderBy != "relevant" && "bg-gray-100"
+            }`}
+            value={orderBy}
+            onValueChange={(type) => handleOrderByChange(type)}
+            options={unsplashOrderByOptions}
           />
         )}
       </div>

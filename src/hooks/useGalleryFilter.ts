@@ -10,6 +10,7 @@ export default function useGalleryFilter() {
   const searchedQuery = searchParams.get("q") || "";
   const currentPage = Number(searchParams.get("page") || 1);
   const selectedImageType = searchParams.get("image_type") || "all";
+  const orderBy = searchParams.get("order_by") || "relevant";
   // Function to update search parameters
   const updateSearchParams = (newParams: Record<string, string | null>) => {
     const updatedSearchParams = new URLSearchParams(searchParams);
@@ -35,6 +36,10 @@ export default function useGalleryFilter() {
     updateSearchParams({ color, page: "1" });
   };
 
+  // Handle OrderBy change
+  const handleOrderByChange = (orderBy: string) => {
+    updateSearchParams({ order_by: orderBy, page: "1" });
+  };
   // Handle search query
   const handleSearch = (query: string) => {
     updateSearchParams({ q: query, page: "1", color: "", orientation: "" });
@@ -56,7 +61,8 @@ export default function useGalleryFilter() {
       page: "1",
       color: "",
       orientation: "",
-      image_type:"all"
+      image_type: "all",
+      order_by: "",
     });
   };
 
@@ -66,13 +72,14 @@ export default function useGalleryFilter() {
       ? selectedOrientation
       : null,
     selectedImageType && selectedImageType != "all",
+    orderBy && orderBy != "relevant",
   ].filter(Boolean) as string[];
 
   const finalPixabayQuery = generateQueryParams(
     ["q", "per_page", "page", "orientation", "colors", "image_type"],
     [
       searchedQuery,
-      30,
+      50,
       currentPage,
       selectedOrientation == "portrait"
         ? "vertical"
@@ -85,7 +92,18 @@ export default function useGalleryFilter() {
   );
   const finalPexelQuery = generateQueryParams(
     ["query", "per_page", "page", "color", "orientation"],
-    [searchedQuery, 30, currentPage, selectedColor, selectedOrientation]
+    [searchedQuery, 50, currentPage, selectedColor, selectedOrientation]
+  );
+  const finalUnsplashQuery = generateQueryParams(
+    ["query", "per_page", "page", "color", "orientation", "order_by"],
+    [
+      searchedQuery,
+      30,
+      currentPage,
+      selectedColor,
+      selectedOrientation == "square" ? "squarish" : selectedOrientation,
+      orderBy,
+    ]
   );
   return {
     selectedOrientation,
@@ -96,12 +114,19 @@ export default function useGalleryFilter() {
     handleColorChange,
     handleSearch,
     handleOrientationChange,
-    finalQuery: source === "pexels" ? finalPexelQuery : finalPixabayQuery,
+    handleImageTypeChange,
     handleResetFilters,
+    handleOrderByChange,
+    finalQuery:
+      source === "pexels"
+        ? finalPexelQuery
+        : source === "pixabay"
+        ? finalPixabayQuery
+        : finalUnsplashQuery,
     appliedFilters,
     setSource,
     source,
     selectedImageType,
-    handleImageTypeChange,
+    orderBy,
   };
 }

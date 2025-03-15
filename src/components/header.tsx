@@ -3,7 +3,7 @@ import ReactLink from "./reactlink";
 import logo from "/tiny.svg";
 export default function () {
   return (
-    <div className="shadow py-4 sticky top-0 z-10 bg-white px-2 xl:px-0">
+    <div className="shadow py-4 sticky top-0 z-10 bg-white px-2 2xl:px-0">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Link to="/" className="flex gap-2">
           <img src={logo} className="size-6" />

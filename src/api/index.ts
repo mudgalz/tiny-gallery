@@ -45,4 +45,24 @@ const fetchPixabayImages = async (url: string): Promise<PixabayResponse> => {
     return { totalHits: 0, hits: [], total: 0 };
   }
 };
-export { fetchCountries, fetchPexelImages, fetchPixabayImages };
+
+const fetchUnsplashImages = async (
+  url: string,
+  isSearch?: boolean
+): Promise<UnsplashResponse> => {
+  try {
+    const res = await axios.get(`https://api.unsplash.com/${url}`, {
+      headers: {
+        Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_API_KEY}`,
+      },
+    });
+    if (isSearch) {
+      return res.data;
+    }
+    return { total: 10000, total_pages: 200, results: res.data };
+  } catch (e) {
+    console.error("Error fetching Unsplash images:", e);
+    return { total: 0, results: [], total_pages: 0 };
+  }
+};
+export { fetchPexelImages, fetchPixabayImages, fetchUnsplashImages };

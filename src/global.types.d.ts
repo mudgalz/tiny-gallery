@@ -1,20 +1,4 @@
-interface Country {
-  name: {
-    common: string;
-    official: string;
-  };
-  capital: string[];
-  latlng: number[];
-  timezones: string[];
-  flag: string;
-  currencies: {
-    [key: string]: {
-      name: string;
-      symbol: string;
-    };
-  };
-}
-
+type SourceType = "pexels" | "pixabay" | "unsplash";
 interface PexelImage {
   id: number;
   width: number;
@@ -75,4 +59,35 @@ interface PixabayResponse {
   total: number;
   totalHits: number;
   hits: PixabayImage[];
+}
+
+interface UnsplashImage {
+  id: string;
+  alt_description: string;
+  urls: {
+    small: string;
+    regular: string;
+    full: string;
+  };
+  color: string;
+  links: {
+    download: string;
+  };
+  user: {
+    name: string;
+    username: string;
+    profile_image: {
+      small: string;
+      medium: string;
+    };
+    links: {
+      html: string;
+    };
+  };
+}
+
+interface UnsplashResponse {
+  total: number;
+  total_pages: number;
+  results: UnsplashImage[];
 }

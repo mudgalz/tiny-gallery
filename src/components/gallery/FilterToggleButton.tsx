@@ -35,6 +35,7 @@ export default function ({ setShowFilters, showFilters }: Props) {
       </TinyTooltip>
       {isFilterApplied && (
         <Button
+          title="Clear Filters"
           onClick={() => handleResetFilters()}
           size="icon"
           variant={"outline"}
