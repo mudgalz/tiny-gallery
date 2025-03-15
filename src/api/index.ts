@@ -65,4 +65,4 @@ const fetchUnsplashImages = async (
     return { total: 0, results: [], total_pages: 0 };
   }
 };
-export { fetchPexelImages, fetchPixabayImages, fetchUnsplashImages };
+export { fetchPexelImages, fetchPixabayImages, fetchUnsplashImages,fetchCountries };
