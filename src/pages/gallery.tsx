@@ -1,4 +1,8 @@
-import { fetchPexelImages, fetchPixabayImages } from "@/api";
+import {
+  fetchPexelImages,
+  fetchPixabayImages,
+  fetchUnsplashImages,
+} from "@/api";
 import GalleryCard from "@/components/gallery/GalleryCard";
 import GalleryHeader from "@/components/gallery/GalleryHeader";
 import GallerySkeleton from "@/components/gallery/GallerySkeleton";
@@ -8,7 +12,7 @@ import useGalleryFilter from "@/hooks/useGalleryFilter";
 import { useQuery } from "@tanstack/react-query";
 
 // Define the response types
-type GalleryResponse = PexelResponse | PixabayResponse;
+type GalleryResponse = PexelResponse | PixabayResponse | UnsplashResponse;
 
 export default function Gallery() {
   const { currentPage, searchedQuery, finalQuery, handlePageChange, source } =
@@ -17,7 +21,10 @@ export default function Gallery() {
   const pexelApiUrl = !!searchedQuery
     ? `search?${finalQuery}`
     : `curated?${finalQuery}`;
-  const pixabayApiUrl = `?${finalQuery}`; // Adjusted
+  const pixabayApiUrl = `?${finalQuery}`;
+  const unsplashApiUrl = !!searchedQuery
+    ? `search/photos?${finalQuery}`
+    : `photos?${finalQuery}`;
 
   const { data, isLoading } = useQuery<GalleryResponse>({
     queryKey: ["gallery", source, finalQuery],
@@ -26,15 +33,21 @@ export default function Gallery() {
         return await fetchPexelImages(
           `https://api.pexels.com/v1/${pexelApiUrl}`
         );
-      } else {
+      } else if (source === "pixabay") {
         return await fetchPixabayImages(pixabayApiUrl);
+      } else {
+        return await fetchUnsplashImages(
+          unsplashApiUrl,
+          searchedQuery ? true : false
+        );
       }
     },
     refetchOnMount: false,
   });
 
   // Safely handle the data depending on the source
-  let flatData: PexelImage[] | PixabayImage[] | undefined = [];
+  let flatData: PexelImage[] | PixabayImage[] | UnsplashImage[] | undefined =
+    [];
   let totalResults: number | undefined;
 
   if (source === "pexels" && data && "photos" in data) {
@@ -43,10 +56,13 @@ export default function Gallery() {
   } else if (source === "pixabay" && data && "hits" in data) {
     flatData = data.hits;
     totalResults = data.totalHits;
+  } else if (source === "unsplash" && data && "results" in data) {
+    flatData = data.results;
+    totalResults = data.total;
   }
 
   return (
-    <div className="w-full p-4 xl:px-0 flex-grow">
+    <div className="w-full p-4 2xl:px-0 flex-grow">
       <GalleryHeader totalData={totalResults} loading={isLoading} />
       <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 mt-4">
         {isLoading ? (

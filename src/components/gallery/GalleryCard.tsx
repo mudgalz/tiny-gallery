@@ -1,13 +1,13 @@
 import useApiMutations from "@/api/mutations";
 import LazyloadImage from "./LazyloadImage";
 import LoadingButton from "../ui/loading-button";
-import { cn } from "@/lib/utils";
+import { cn, getImageAttr } from "@/lib/utils";
 import GalleryImageOverlay from "./GalleryImageOverlay";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
 
 interface GalleryCardProps {
   className?: string;
-  image: PexelImage | PixabayImage;
+  image: PexelImage | PixabayImage | UnsplashImage;
 }
 
 export default function ({ className, image }: GalleryCardProps) {
@@ -15,7 +15,7 @@ export default function ({ className, image }: GalleryCardProps) {
   const handleDownload = (url: string, filename: string) => {
     downloadImageMutation.mutate({ url, filename });
   };
-  const isPexelImage = "avg_color" in image;
+  const { photographer, profileUrl, download } = getImageAttr(image);
   return (
     <div
       className={cn(
@@ -36,12 +36,8 @@ export default function ({ className, image }: GalleryCardProps) {
             title="View Photographer Profile"
             target="_blank"
             className="underline"
-            href={
-              isPexelImage
-                ? image.photographer_url
-                : `https://pixabay.com/users/${image.user_id}`
-            }>
-            {isPexelImage ? image.photographer : image.user}
+            href={profileUrl}>
+            {photographer}
           </a>
         </div>
       </div>
@@ -52,12 +48,7 @@ export default function ({ className, image }: GalleryCardProps) {
           size="sm"
           title="Download Image"
           isLoading={downloadImageMutation.isPending}
-          onClick={() =>
-            handleDownload(
-              isPexelImage ? image.src.original : image.largeImageURL,
-              `tiny-image-${image.id}.png`
-            )
-          }
+          onClick={() => handleDownload(download, `tiny-image-${image.id}.png`)}
           className="bg-white text-black hover:bg-gray-200 h-6 px-2 sm:h-8 sm:px-3">
           <span className="hidden sm:block">Download</span>
           <ArrowDownIcon className="sm:hidden" />

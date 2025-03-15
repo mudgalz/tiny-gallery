@@ -8,6 +8,7 @@ const orientationOptions = [
 const imageSourceOptions = [
   { label: "Pexels", value: "pexels" },
   { label: "Pixabay", value: "pixabay" },
+  { label: "Unsplash", value: "unsplash" },
 ];
 
 const hexColors = [
@@ -33,23 +34,33 @@ const hexColors = [
   "#000000",
   "#FFFFFF",
 ];
-
-const pixabayColorOptions = [
+const commonColors = [
   { label: "All Colors", value: "all" },
+  { label: "Black", value: "black" },
+  { label: "White", value: "white" },
+  { label: "Yellow", value: "yellow" },
+  { label: "Orange", value: "orange" },
+  { label: "Red", value: "red" },
+  { label: "Green", value: "green" },
+  { label: "Blue", value: "blue" },
+];
+
+const pixabayExtraColors = [
   { label: "Grayscale", value: "grayscale" },
   { label: "Transparent", value: "transparent" },
-  { label: "Red", value: "red" },
-  { label: "Orange", value: "orange" },
-  { label: "Yellow", value: "yellow" },
-  { label: "Green", value: "green" },
   { label: "Turquoise", value: "turquoise" },
-  { label: "Blue", value: "blue" },
   { label: "Lilac", value: "lilac" },
   { label: "Pink", value: "pink" },
-  { label: "White", value: "white" },
   { label: "Gray", value: "gray" },
   { label: "Black", value: "black" },
   { label: "Brown", value: "brown" },
+];
+
+const unsplashExtraColors = [
+  { label: "Black and White", value: "black_and_white" },
+  { label: "Purple", value: "purple" },
+  { label: "Magenta", value: "magenta" },
+  { label: "Teal", value: "teal" },
 ];
 
 const pixabayImageTypes = [
@@ -58,10 +69,18 @@ const pixabayImageTypes = [
   { label: "Illustration", value: "illustration" },
   { label: "Vector", value: "vector" },
 ];
+const unsplashOrderByOptions = [
+  { label: "Relevant", value: "relevant" },
+  { label: "Latest", value: "latest" },
+];
+const pixabayColorOptions = [...commonColors, ...pixabayExtraColors];
+const unsplashColorOptions = [...commonColors, ...unsplashExtraColors];
 export {
+  unsplashOrderByOptions,
   orientationOptions,
   hexColors,
   imageSourceOptions,
   pixabayColorOptions,
+  unsplashColorOptions,
   pixabayImageTypes,
 };

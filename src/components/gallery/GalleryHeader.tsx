@@ -57,7 +57,7 @@ export default function ({ totalData = 0, loading }: Props) {
             value={source}
             onValueChange={(v) => {
               handleResetFilters();
-              setSource(v as "pexels" | "pixabay");
+              setSource(v as SourceType);
             }}
             options={imageSourceOptions}
           />
