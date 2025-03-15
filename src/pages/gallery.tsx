@@ -10,6 +10,7 @@ import { AbsoluteCenteredWrapper } from "@/components/loader";
 import PaginationSelector from "@/components/ui/PaginationSelector";
 import useGalleryFilter from "@/hooks/useGalleryFilter";
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 // Define the response types
 type GalleryResponse = PexelResponse | PixabayResponse | UnsplashResponse;
@@ -17,49 +18,51 @@ type GalleryResponse = PexelResponse | PixabayResponse | UnsplashResponse;
 export default function Gallery() {
   const { currentPage, searchedQuery, finalQuery, handlePageChange, source } =
     useGalleryFilter();
-
-  const pexelApiUrl = !!searchedQuery
-    ? `search?${finalQuery}`
-    : `curated?${finalQuery}`;
-  const pixabayApiUrl = `?${finalQuery}`;
-  const unsplashApiUrl = !!searchedQuery
-    ? `search/photos?${finalQuery}`
-    : `photos?${finalQuery}`;
+  const apiUrl = useMemo(() => {
+    switch (source) {
+      case "pexels":
+        return `https://api.pexels.com/v1/${
+          searchedQuery ? `search?${finalQuery}` : `curated?${finalQuery}`
+        }`;
+      case "pixabay":
+        return `?${finalQuery}`;
+      case "unsplash":
+        return searchedQuery
+          ? `search/photos?${finalQuery}`
+          : `photos?${finalQuery}`;
+      default:
+        return "";
+    }
+  }, [source, searchedQuery, finalQuery]);
 
   const { data, isLoading } = useQuery<GalleryResponse>({
     queryKey: ["gallery", source, finalQuery],
     queryFn: async () => {
-      if (source === "pexels") {
-        return await fetchPexelImages(
-          `https://api.pexels.com/v1/${pexelApiUrl}`
-        );
-      } else if (source === "pixabay") {
-        return await fetchPixabayImages(pixabayApiUrl);
-      } else {
-        return await fetchUnsplashImages(
-          unsplashApiUrl,
-          searchedQuery ? true : false
-        );
+      switch (source) {
+        case "pexels":
+          return await fetchPexelImages(apiUrl);
+        case "pixabay":
+          return await fetchPixabayImages(apiUrl);
+        case "unsplash":
+          return await fetchUnsplashImages(apiUrl, !!searchedQuery);
       }
     },
     refetchOnMount: false,
   });
 
   // Safely handle the data depending on the source
-  let flatData: PexelImage[] | PixabayImage[] | UnsplashImage[] | undefined =
-    [];
-  let totalResults: number | undefined;
+  const { flatData, totalResults } = useMemo(() => {
+    if (!data) return { flatData: [], totalResults: 0 };
 
-  if (source === "pexels" && data && "photos" in data) {
-    flatData = data.photos;
-    totalResults = data.total_results;
-  } else if (source === "pixabay" && data && "hits" in data) {
-    flatData = data.hits;
-    totalResults = data.totalHits;
-  } else if (source === "unsplash" && data && "results" in data) {
-    flatData = data.results;
-    totalResults = data.total;
-  }
+    if (source === "pexels" && "photos" in data) {
+      return { flatData: data.photos, totalResults: data.total_results };
+    } else if (source === "pixabay" && "hits" in data) {
+      return { flatData: data.hits, totalResults: data.totalHits };
+    } else if (source === "unsplash" && "results" in data) {
+      return { flatData: data.results, totalResults: data.total };
+    }
+    return { flatData: [], totalResults: 0 };
+  }, [data, source]);
 
   return (
     <div className="w-full p-4 2xl:px-0 flex-grow">
@@ -80,7 +83,7 @@ export default function Gallery() {
         <PaginationSelector
           currentPage={currentPage}
           onPageChange={(page) => handlePageChange(page)}
-          pages={Math.ceil(totalResults / 30)}
+          pages={Math.ceil(totalResults / (source === "unsplash" ? 30 : 50))}
         />
       ) : null}
     </div>

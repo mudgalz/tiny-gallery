@@ -10,7 +10,7 @@ export default function useGalleryFilter() {
   const searchedQuery = searchParams.get("q") || "";
   const currentPage = Number(searchParams.get("page") || 1);
   const selectedImageType = searchParams.get("image_type") || "all";
-  const orderBy = searchParams.get("order_by") || "popular";
+  const orderBy = searchParams.get("order_by") || "relevant";
   // Function to update search parameters
   const updateSearchParams = (newParams: Record<string, string | null>) => {
     const updatedSearchParams = new URLSearchParams(searchParams);
@@ -62,6 +62,7 @@ export default function useGalleryFilter() {
       color: "",
       orientation: "",
       image_type: "all",
+      order_by: "",
     });
   };
 
@@ -71,13 +72,14 @@ export default function useGalleryFilter() {
       ? selectedOrientation
       : null,
     selectedImageType && selectedImageType != "all",
+    orderBy && orderBy != "relevant",
   ].filter(Boolean) as string[];
 
   const finalPixabayQuery = generateQueryParams(
     ["q", "per_page", "page", "orientation", "colors", "image_type"],
     [
       searchedQuery,
-      30,
+      50,
       currentPage,
       selectedOrientation == "portrait"
         ? "vertical"
@@ -90,7 +92,7 @@ export default function useGalleryFilter() {
   );
   const finalPexelQuery = generateQueryParams(
     ["query", "per_page", "page", "color", "orientation"],
-    [searchedQuery, 30, currentPage, selectedColor, selectedOrientation]
+    [searchedQuery, 50, currentPage, selectedColor, selectedOrientation]
   );
   const finalUnsplashQuery = generateQueryParams(
     ["query", "per_page", "page", "color", "orientation", "order_by"],

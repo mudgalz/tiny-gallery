@@ -59,7 +59,7 @@ const fetchUnsplashImages = async (
     if (isSearch) {
       return res.data;
     }
-    return { total: 6000, total_pages: 200, results: res.data };
+    return { total: 10000, total_pages: 200, results: res.data };
   } catch (e) {
     console.error("Error fetching Unsplash images:", e);
     return { total: 0, results: [], total_pages: 0 };

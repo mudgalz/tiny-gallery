@@ -52,7 +52,6 @@ const pixabayExtraColors = [
   { label: "Lilac", value: "lilac" },
   { label: "Pink", value: "pink" },
   { label: "Gray", value: "gray" },
-  { label: "Black", value: "black" },
   { label: "Brown", value: "brown" },
 ];
 
