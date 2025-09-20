@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/tiny.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tiny Gallery</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Explore and download beautiful images in Tiny Gallery. A user-friendly gallery app with simple search & filter features." />
-    <meta name="keywords" content="gallery, images, download, photos, Tiny Gallery" />
-    <meta name="author" content="Your Name" />
 
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Tiny Gallery" />
-    <meta property="og:description" content="Explore and download beautiful images in Tiny Gallery." />
-    <meta property="og:image" content="https://framerusercontent.com/images/bWDltzT9QL2CADqyCWdEAOUBSo0.png?scale-down-to=1024" />
-    <meta property="og:url" content="https://tinygallery.netlify.app" />
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Tiny Gallery" />
+    <meta name="description" content="Tiny Gallery - A minimalistic gallery to showcase your images." />
+    <meta name="author" content="Tiny Gallery" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tinygallery.netlify.app/" />
+    <meta property="og:title" content="Tiny Gallery" />
+    <meta property="og:description" content="Tiny Gallery - A minimalistic gallery to showcase your images." />
+    <meta property="og:image" content="https://tinygallery.netlify.app/og_img.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://tinygallery.netlify.app/" />
     <meta name="twitter:title" content="Tiny Gallery" />
-    <meta name="twitter:description" content="Explore and download beautiful images in Tiny Gallery." />
-    <meta name="twitter:image" content="https://framerusercontent.com/images/bWDltzT9QL2CADqyCWdEAOUBSo0.png?scale-down-to=1024" />
+    <meta name="twitter:description" content="Tiny Gallery - A minimalistic gallery to showcase your images." />
+    <meta name="twitter:image" content="https://tinygallery.netlify.app/og_img.png" />
 
+    <!-- Optional: Favicon for Apple devices -->
+    <link rel="apple-touch-icon" href="/tiny.svg" />
+    
+    <!-- Optional: Schema.org for Google rich results -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Tiny Gallery",
-      "url": "https://tinygallery.netlify.app",
-      "description": "Explore and download beautiful images in Tiny Gallery."
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Tiny Gallery",
+        "url": "https://tinygallery.netlify.app/",
+        "description": "Tiny Gallery - A minimalistic gallery to showcase your images."
+      }
     </script>
-</head>
-<body class="hideScrollbar">
+  </head>
+  <body class="hideScrollbar">
     <div id="root"></div>
-<script type="module" src="/src/main.tsx"></script>
-</body>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
