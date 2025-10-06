@@ -67,7 +67,7 @@ export default function Gallery() {
   return (
     <div className="w-full p-4 2xl:px-0 flex-grow">
       <GalleryHeader totalData={totalResults} loading={isLoading} />
-      <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 mt-4">
+      <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4 mt-4">
         {isLoading ? (
           <GallerySkeleton />
         ) : (
