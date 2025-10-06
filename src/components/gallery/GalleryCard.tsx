@@ -1,9 +1,9 @@
 import useApiMutations from "@/api/mutations";
-import LazyloadImage from "./LazyloadImage";
-import LoadingButton from "../ui/loading-button";
 import { cn, getImageAttr } from "@/lib/utils";
-import GalleryImageOverlay from "./GalleryImageOverlay";
 import { ArrowDownIcon } from "@radix-ui/react-icons";
+import LoadingButton from "../ui/loading-button";
+import GalleryImageOverlay from "./GalleryImageOverlay";
+import LazyloadImage from "./LazyloadImage";
 
 interface GalleryCardProps {
   className?: string;
@@ -12,10 +12,12 @@ interface GalleryCardProps {
 
 export default function ({ className, image }: GalleryCardProps) {
   const { downloadImageMutation } = useApiMutations();
+
   const handleDownload = (url: string, filename: string) => {
     downloadImageMutation.mutate({ url, filename });
   };
-  const { photographer, profileUrl, download } = getImageAttr(image);
+
+  const { photographer, profileUrl, download, } = getImageAttr(image);
   return (
     <div
       className={cn(

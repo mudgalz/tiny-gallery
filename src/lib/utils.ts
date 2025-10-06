@@ -57,8 +57,8 @@ export const getImageAttr = (image: any) => {
         ${image.src?.tiny} 200w,
         ${image.src?.small} 400w,
         ${image.src?.medium} 800w,
-        ${image.src?.medium} 1200w,
-        ${image.src?.medium} 1600w
+        ${image.src?.large} 1200w,
+        ${image.src?.large} 1600w
       `.trim(),
     };
   }
@@ -78,7 +78,7 @@ export const getImageAttr = (image: any) => {
         ${image.urls?.thumb} 200w,
         ${image.urls?.small_s3} 400w,
         ${image.urls?.small} 800w,
-        ${image.urls?.regular} 1200w,
+        ${image.urls?.small} 1200w,
         ${image.urls?.regular} 1600w
       `.trim(),
     };
