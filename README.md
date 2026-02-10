@@ -25,22 +25,10 @@ I made this page to learn more about using APIs and to practice building a simpl
 - ESLint
 - Pexels API
 - Pixabay API
+- Unsplash API
 - React Query
 - Shadcn
 
 ## Contribution
-
-If you want to contribute to this project, I'd be happy to accept pull requests to add new features or sources. Here are some ways you can contribute:
-
-- Add a new page for a different source of photos, such as Unsplash or Flickr.
-- Add a filter to the existing page to allow users to search for photos from a different source.
-- Add a feature to allow users to save their favorite photos.
-- Add a feature to allow users to upload their own photos.
-
-Please make sure to follow the following guidelines before making a pull request:
-
-- Make sure your code is well tested and follows the existing coding style.
-- Make sure your code is compatible with the latest version of React.
-- Make sure your changes do not break any existing features.
 
 I'm open to any suggestions or ideas you may have, so feel free to reach out to me if you have any questions or need help with anything.

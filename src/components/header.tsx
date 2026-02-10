@@ -9,13 +9,11 @@ export default function () {
           <img src={logo} className="size-6" />
           <h1 className="font-medium">Tiny Gallery</h1>
         </Link>
-        <div className="flex gap-2">
           <div className="flex gap-2">
-            <ReactLink target="_blank" href="https://mudgal.framer.ai">
-              I'm Here
+             <ReactLink target="_blank" href="https://github.com/mudgalz/tiny-gallery">
+              Github
             </ReactLink>
           </div>
-        </div>
       </div>
     </div>
   );
